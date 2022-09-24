@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <h2>Daily Result</h2>        
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Khabar Name</th>
+        <th>Today Khabar</th>
+        <th>Last Khabar</th>
+        <th>Open-Close Khabar</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+</div>
+</body>
+<script type="text/javascript">
+
+  // $(function () {
+  //   $(".KhabarEdit").dblclick(function (e) {
+  //      e.stopPropagation();
+  //      var currentEle = $(this);
+  //      var value = $(this).html();
+  //      var myID = $(this).attr('value');
+  //      var type = $(this).attr('type');
+  //      updateVal(currentEle, value, myID, type);
+  //   });
+  // });
+
+
+
+  $(document).ready(function(){
+    $.ajax({
+      url: 'http://localhost:3000/DeshawarKing/dailyKhabar',
+      success: function(result){
+        result.DailyKhabar.map((data) =>{
+          $('#tableBody').append(`
+          <tr>
+            <td>${data.khabarName}</td>
+            <td class='KhabarEdit' type="today" value="${data._id}">${data.khabarToday}</td>
+            <td class='KhabarEdit' type="last" value="${data._id}">${data.khabarLast}</td>
+            <td class='KhabarEdit' type="OC" value="${data._id}">${data.khabarOpenClose}</td>
+          </tr>
+        `);
+        })
+      }
+    });
+  })
+
+  $("#tableBody").on("dblclick",".KhabarEdit", function(e){
+    e.stopPropagation();
+       var currentEle = $(this);
+       var value = $(this).html();
+       var myID = $(this).attr('value');
+       var type = $(this).attr('type');
+       updateVal(currentEle, value, myID, type);
+  });
+
+function updateVal(currentEle, value, myID,type) {
+  $(currentEle).html('<input class="thVal" type="text" value="' + value + '" />');
+  $(".thVal").focus();
+  $(".thVal").keyup(function (event) {
+      if (event.keyCode == 13) {
+          var Khabar = $(".thVal").val();
+          $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            // data: JSON.stringify({name:'aadas'}),
+            data: JSON.stringify({KhabarID:myID, KhabarNo:Khabar, KhabarType:type}),
+            url: 'https://sattakingapi.herokuapp.com/sattaking/updateKhabar',
+            success: function(result){
+              alert(result);
+              location.reload();
+            }
+          });
+          $(currentEle).html(Khabar);
+      }
+  });
+
+  $(document).click(function () {
+        $(currentEle).html($(".thVal").val());
+  });
+}
+</script>
+</html>
