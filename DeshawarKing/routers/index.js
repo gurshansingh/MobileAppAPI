@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { getDailyKhabars, getImageBanner, getLuckyNumber } = require("../controller");
+const { getDailyKhabars, getImageBanner, getLuckyNumber, updateDailyKhabar } = require("../controller");
 
 router.get("/dailyKhabar", getDailyKhabars);
 
@@ -8,11 +8,7 @@ router.get("/imageBanner", getImageBanner);
 
 router.get("/luckyNumber", getLuckyNumber);
 
-router.get("/mylove", (req, res) =>{
-    res.status(200).json({
-        'status':'done'
-    })
-});
+router.post("/updateKhabar", updateDailyKhabar);
 
 
 module.exports = router;
