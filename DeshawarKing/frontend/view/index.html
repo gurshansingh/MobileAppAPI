@@ -41,7 +41,7 @@
 
   $(document).ready(function(){
     $.ajax({
-      url: 'http://localhost:3000/DeshawarKing/dailyKhabar',
+      url: 'https://real-plum-dress.cyclic.app/DeshawarKing/dailyKhabar',
       success: function(result){
         result.DailyKhabar.map((data) =>{
           $('#tableBody').append(`
@@ -77,7 +77,7 @@ function updateVal(currentEle, value, myID,type) {
             contentType: "application/json",
             // data: JSON.stringify({name:'aadas'}),
             data: JSON.stringify({KhabarID:myID, KhabarNo:Khabar, KhabarType:type}),
-            url: 'https://sattakingapi.herokuapp.com/sattaking/updateKhabar',
+            url: 'https://real-plum-dress.cyclic.app/sattaking/updateKhabar',
             success: function(result){
               alert(result);
               location.reload();

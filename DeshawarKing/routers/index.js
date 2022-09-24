@@ -8,4 +8,11 @@ router.get("/imageBanner", getImageBanner);
 
 router.get("/luckyNumber", getLuckyNumber);
 
+router.get("/mylove", (req, res) =>{
+    res.status(200).json({
+        'status':'done'
+    })
+});
+
+
 module.exports = router;
