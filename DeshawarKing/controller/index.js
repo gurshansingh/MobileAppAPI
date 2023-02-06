@@ -1,6 +1,7 @@
 const Khabar = require("../modals/khabar.model");
 const Image = require("../modals/image.model");
 const Lucky = require("../modals/luckynumber.model");
+const SingleJodi = require("../modals/singlejodi.model");
 
 const getDailyKhabars = async (req, res) => {
   Khabar.find()
@@ -11,6 +12,14 @@ const getDailyKhabars = async (req, res) => {
     .catch(function () {
       console.log("error");
     });
+};
+
+const newSingleJodi = async (req, res) => {
+  const singleJodi = new SingleJodi({
+    khabarName:'Deshraj',
+    singleJodi:65
+  });
+  singleJodi.create();
 };
 
 const getImageBanner = async (req, res) => {
@@ -76,4 +85,4 @@ const updateDailyKhabar = async (req, res) => {
   }
 };
 
-module.exports = { getDailyKhabars, getImageBanner, getLuckyNumber, updateDailyKhabar };
+module.exports = { getDailyKhabars, getImageBanner, getLuckyNumber, updateDailyKhabar, newSingleJodi };
