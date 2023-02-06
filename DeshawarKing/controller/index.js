@@ -23,6 +23,16 @@ const newSingleJodi = async (req, res) => {
   return res.json("ok");
 };
 
+const getSingleJodi = async (req, res) => {
+  SingleJodi.find()
+    .then((items) => {
+      return res.status(200).json({ singleJodi: items });
+    })
+    .catch(function () {
+      console.log("error");
+    });
+};
+
 const getImageBanner = async (req, res) => {
   Image.find()
     .then((items) => {
