@@ -96,4 +96,4 @@ const updateDailyKhabar = async (req, res) => {
   }
 };
 
-module.exports = { getDailyKhabars, getImageBanner, getLuckyNumber, updateDailyKhabar, newSingleJodi };
+module.exports = { getDailyKhabars, getImageBanner, getLuckyNumber, updateDailyKhabar, newSingleJodi, getSingleJodi };
