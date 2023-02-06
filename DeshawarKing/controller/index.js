@@ -19,7 +19,7 @@ const newSingleJodi = async (req, res) => {
     khabarName:'Deshraj',
     singleJodi:65
   });
-  singleJodi.create();
+  singleJodi.save();
 };
 
 const getImageBanner = async (req, res) => {
