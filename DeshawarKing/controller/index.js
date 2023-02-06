@@ -20,6 +20,7 @@ const newSingleJodi = async (req, res) => {
     singleJodi:65
   });
   singleJodi.save();
+  return res.json("ok");
 };
 
 const getImageBanner = async (req, res) => {
